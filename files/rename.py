@@ -16,7 +16,7 @@ class FileDetails:
 			print 'new: ' + self.getNewName()
 			os.rename(self.getOldName(), self.getNewName())
 		else:
-			print 'rename: ' + self.directory + self.file_name + ' to: ' + self.getNewName()
+			print 'rename: ' + self.getOldName() + ' to: ' + self.getNewName()
 
 	def findFileDetails(self):
 		self.number=''
@@ -39,10 +39,10 @@ class FileDetails:
 		return characters[:(len(characters) - 1)]
 
 	def getNewName(self):
-		return self.directory + ('', '/')[directory.endswith('/')] + self.name + self.serialNumber + '-' + self.number + self.fileParts[1]
+		return self.directory + ('/', '')[directory.endswith('/')] + self.name + self.serialNumber + '-' + self.number + self.fileParts[1]
 
 	def getOldName(self):
-		return self.directory + ('', '/')[directory.endswith('/')] + self.file_name		
+		return self.directory + ('/', '')[directory.endswith('/')] + self.file_name		
 
 
 class Skip:
