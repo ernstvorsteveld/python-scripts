@@ -21,13 +21,26 @@ def readCollection(db, collectionName):
     for content in documents:
         print JSONEncoder().encode(content)
 
-def writeCollection(db, collectionName, directory):
-    collection = db[collectionName]
+def writeCollection(readDB, collectionName, directory):
+    print "writing to directory: " + directory
+    collection = readDB[collectionName]
     documents = collection.find()
     iterator = 0;
     for content in documents:
+        print content
         iterator = iterator + 1
-        output = open(os.path.join(directory, collectionName + str(iterator) + '.json'), "w")
+        output = open(os.path.join(directory + "/" + collectionName, collectionName + str(iterator) + '.json'), "w")
         output.write(JSONEncoder().encode(content))
+
+
+def writeCollectionToDb(readDB, writeDB, customerName, collectionName, collectionTo):
+    collection = readDB[collectionName]
+    documents = collection.find()
+    iterator = 0;
+    for content in documents:
+        print content
+        content["customerName"] = customerName
+        iterator = iterator + 1
+        writeDB[collectionTo].save(content)
 
 
